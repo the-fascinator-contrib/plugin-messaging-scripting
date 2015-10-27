@@ -63,9 +63,9 @@ public class MessagingScript implements MessageListener {
         		ScriptEngineManager manager = new ScriptEngineManager();
                 engine = manager.getEngineByName(scriptEngineName);
                 engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
+                engine.put("config", config);
         	}
-        	FileReader fileReader = new FileReader(file);
-        	engine.put("config", config);
+        	FileReader fileReader = new FileReader(file); // reads a fresh script file everytime, no caching.
         	engine.put("message", text);
         	log.debug("Running script: {}", file.getAbsolutePath());
         	engine.eval(fileReader);
