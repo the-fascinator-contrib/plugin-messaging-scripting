@@ -30,6 +30,7 @@ Add the following sample config block as an entry in the "messaging.threads" arr
 The following objects are added as local variables to the script:
 
 ```
+"message" - the message as a String
 "indexer" - the indexer plugin
 "storage" - active storage plugin
 "messaging" - See Fascinator's MessagingServices.java
