@@ -127,7 +127,7 @@ public class MessagingScriptsQueueConsumer implements GenericListener {
 				MessagingScript messagingScript = new MessagingScript();
 				String scriptPath = scriptConfigJson.getString(null, "scriptPath");
 				messagingScript.destName = scriptConfigJson.getString(null, "name");
-				messagingScript.scriptEngineName = scriptConfigJson.getString(null, "scriptEngine");
+				messagingScript.scriptEngineName = scriptConfigJson.getString(null, "scriptEngine"); // added so that we don't need to implement filename extension guessing 
 				messagingScript.destType = scriptConfigJson.getString(null, "type");
 				messagingScript.config = scriptConfigJson;
 				log.debug("Queue Name: " + messagingScript.destName + ", Type: " + messagingScript.destType + ", scriptPath:" + scriptPath);
@@ -181,11 +181,11 @@ public class MessagingScriptsQueueConsumer implements GenericListener {
             storage.init(sysFile);
             // Prepare bindings
             bindings = new SimpleBindings();
-            bindings.put("indexer", indexer);
-            bindings.put("storage", storage);
-            bindings.put("messaging", messaging);
-            bindings.put("globalConfig", globalConfig);
-            bindings.put("log", log);
+            bindings.put("indexer", indexer); // the indexer plugin
+            bindings.put("storage", storage); // active storage plugin
+            bindings.put("messaging", messaging); // See Fascinator's MessagingServices.java
+            bindings.put("globalConfig", globalConfig); // Global Configuration
+            bindings.put("log", log); // the parent log file
             
         } catch (IOException ioe) {
             log.error("Failed to read configuration: {}", ioe.getMessage());

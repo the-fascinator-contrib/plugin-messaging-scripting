@@ -15,7 +15,7 @@ Add the following sample config block as an entry in the "messaging.threads" arr
         "destinations": [
             {
                 "name": "testQueue",
-                "type": "topic",
+                "type": "queue",
                 "scriptPath": "home/scripts/messaging/test.groovy",
                 "scriptEngine":"groovy",
                 "scriptConfig": {
@@ -25,4 +25,14 @@ Add the following sample config block as an entry in the "messaging.threads" arr
         ]
     }
 } 
+```
+
+The following objects are added as local variables to the script:
+
+```
+bindings.put("indexer", indexer); // the indexer plugin
+bindings.put("storage", storage); // active storage plugin
+bindings.put("messaging", messaging); // See Fascinator's MessagingServices.java
+bindings.put("globalConfig", globalConfig); // Global Configuration
+bindings.put("log", log); // the parent log file
 ```
