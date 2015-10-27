@@ -30,9 +30,10 @@ Add the following sample config block as an entry in the "messaging.threads" arr
 The following objects are added as local variables to the script:
 
 ```
-bindings.put("indexer", indexer); // the indexer plugin
-bindings.put("storage", storage); // active storage plugin
-bindings.put("messaging", messaging); // See Fascinator's MessagingServices.java
-bindings.put("globalConfig", globalConfig); // Global Configuration
-bindings.put("log", log); // the parent log file
+"indexer" - the indexer plugin
+"storage" - active storage plugin
+"messaging" - See Fascinator's MessagingServices.java
+"config" - Messaging Script local config, ie. the entry in the 'destinations' array above.
+"globalConfig" - Global Configuration
+"log" - the parent log file
 ```
