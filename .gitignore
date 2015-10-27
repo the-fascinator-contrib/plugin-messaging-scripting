@@ -1,0 +1,17 @@
+target/
+
+.settings/
+
+.classpath
+
+.project
+
+bin/
+/release.properties
+/pom.xml.releaseBackup
+
+
+sql/
+documentation-site/node_modules/
+documentation-site/out/
+.pydevproject
