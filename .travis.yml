@@ -1,0 +1,19 @@
+sudo: required
+language: java
+services:
+- docker
+before_install:
+- mkdir /tmp/build
+- docker pull qcifengineering/redbox-builder
+- docker run -v /tmp/build:/build -e "CLONEPATH=https://github.com/the-fascinator/the-fascinator.git"
+  qcifengineering/redbox-builder
+install: true
+script: true
+after_success:
+- docker run -v /tmp/build:/build -e "SONATYPE_USERNAME=$SONATYPE_USERNAME" -e "SONATYPE_PASSWORD=$SONATYPE_PASSWORD"
+  qcifengineering/redbox-builder /bin/bash -c "cd build/src;mvn --settings /m2_repo/travis-settings.xml
+  -Dmaven.repo.local=/m2_repo -DskipTests=true deploy"
+env:
+  global:
+  - secure: FNGbsFa8lo9ouwusdAgg3rOz2XjohCbOD575AJPi9prMDZaFi2+Zt0eIWnlZYEaPyOE4Cpe2BH46Npc7Rg5vAtyaBFe+9boMEyIZO1FnfA99FY0lqPv8Xnodd6YmkFX8iblxrbE9jivC1hoacPYbC3zT21mTlGQEC4GG9W8gth/Mya22B0zS9trs7giZKFviF9JdaYhHV/fsYb+n8bReoHac545YdbBHdtxJoM2zGF3L+t7FDWcFvVRo/zj3K+Tw4niyeOev+Pe6WEybksh5LQBLDDomxRLzCvF5xiql6E4/XMjVrbNkPQRrHQ4ftyI8qKgOq/cWqEjuY2Hub2x0HkpllBJEcAm5BPPWEtDrCKW5/Wk7lRbiU7CgK57hK4Zc9YOzegYyqlSHlR32SSL/+K/hMhpQPAbwgncc6ZAHmU79GH4VNclUpQHuNk7s1hkTtKNfKR/nWAegcrmHxirrTn2XBzjqM8bWLZGiIPbM6Rc3IU2h+dhQVsxIdXe3XfoZQcN23fA9Yj8HWGeALULsqM/kWq0LNHB7IrccUEUtCg9MhouzO3Rl1r5MGwr14xplpzGZrrG0Y3y2sgB2X+4Bs6WPd8TOjYwG2genxVfY+iown9Z2H4ZBSO+2RH/JBVzfnHagAQzvbpSsy2qgvj4t39cq8AXefbHO1Rs2BTzUkAo=
+  - secure: PQAPMZ+aTEwhOxDKG6vTaa8qWzOXn2iQxC4nswnDsc+Y6x0V5B6xwAb97zRS5VDh8G0ddCISUUCx3hP2NzTZ0tLVztcper+izg3/h/27oYQZLokNC3sMbP/UgCL97b0fwfRw8On5N8GEGWM4/ZYapYEiU/3eqerg/I3rAeIASb7VADt5BICK2v40bbSKoJR9SlyEG3aINeb1WW/k+Y5Tnx+fXWmdzfVNuFaOhxeEjalzpgISFCXZomJ9Z4fWKoHO0Yv4NF/kfiuf39NNg297az/eM/8ha8ELmNmy/ZqVsJ6e8pcpU86Ysx443q2/aDBhxn38nhLoUhjfeX2hLFmGzgOlkgSgqIKVD+X5J2KmxsMSFCZENr4ykXSADt6Np7AACIbZeohZjqDG4Gk1AzbImw9IH7jPYzPwDQ9snSo9GP347rOYjD9wjzcJ1aYf6bu500zGgwBB/GvUAKkQ0GmKR74nNXE/EjMremccnOhB7sdoB9QYA3iCE0m3wodui98RjL9Z2cwbQ71HkgSxWFpgLC8T30RJ2K7azpukNJhQ0bRWTPBwHFiRFHlOydCS8fkzv8Sz+yoj3tBPVt7ngNX7I7VQ51Rq92CuZJUKmHzHideFjiYqGlGMudwp/8OslyOkSB1uezrjQlRfxEoXF3FoCi40vA1zYjCoJMdN+XbXF+U=
