@@ -18,6 +18,7 @@
 package au.com.redboxresearchdata.fascinator.messaging.scripting;
 
 import java.io.*;
+import java.util.HashMap;
 
 import javax.script.*;
 import javax.jms.*;
@@ -51,6 +52,7 @@ public class MessagingScript implements MessageListener {
     
     private static Logger log = LoggerFactory.getLogger(MessagingScript.class);
     private ScriptEngine engine;
+    private HashMap<String, HashMap<String, Object>> configMap;
 	/**
 	 * Handles the incoming message by launching the script, binding the text payload as 'message'.
 	 */
@@ -63,10 +65,25 @@ public class MessagingScript implements MessageListener {
         		ScriptEngineManager manager = new ScriptEngineManager();
                 engine = manager.getEngineByName(scriptEngineName);
                 engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
-                engine.put("config", config);
+                // the engine is stateful, and multiple queues means that different queues will clash
+                // still won't affect different messages coming through the same queue as AMQ will deal with sycnhronization
+                // will affect how config is read in the messaging scripts, needs to access it as `configMap[<queue name>]`
+                configMap = new HashMap<String, HashMap<String, Object>>();
+                engine.put("configMap", configMap);
         	}
+        	configMap = (HashMap) engine.get("configMap");
+        	HashMap<String, Object> scriptParam = configMap.get(destName);
+        	if (scriptParam == null) {
+        		log.debug("Creating new script parameter...");
+        		scriptParam = new HashMap<String, Object>();
+        		configMap.put(destName, scriptParam);
+        	}
+        	log.debug("Destination: " + destName);
+        	log.debug("Configuration:");
+        	log.debug(config.toString(true));
+        	scriptParam.put("config", config);
         	FileReader fileReader = new FileReader(file); // reads a fresh script file everytime, no caching.
-        	engine.put("message", text);
+        	scriptParam.put("message", text);
         	log.debug("Running script: {}", file.getAbsolutePath());
         	engine.eval(fileReader);
         	log.debug("Done running: {}", file.getAbsoluteFile());
