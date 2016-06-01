@@ -1,7 +1,7 @@
 sudo: required
 language: java
 services:
-- docker
+- docker 
 before_install:
 - mkdir /tmp/build
 - docker pull qcifengineering/redbox-builder
