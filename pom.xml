@@ -43,7 +43,8 @@
   	</plugins>
   </build>
   <scm>
-    <url>https://github.com/the-fascinator-contrib/plugin-messaging-scripting</url>
+    <url>scm:git://github.com/the-fascinator-contrib/plugin-messaging-scripting</url>
+    <connection>scm:git://github.com/the-fascinator-contrib/plugin-messaging-scripting</connection>
     <developerConnection>scm:git:https://github.com/the-fascinator-contrib/plugin-messaging-scripting.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
