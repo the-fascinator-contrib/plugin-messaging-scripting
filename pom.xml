@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>au.com.redboxresearchdata.fascinator</groupId>
   <artifactId>plugin-messaging-scripting</artifactId>
-  <version>1.4-SNAPSHOT</version>
+  <version>1.4</version>
   <name>Plugin Messaging Scripts (ReDBox-Mint)</name>
   <parent>
     <artifactId>organisation</artifactId>
@@ -17,12 +17,12 @@
     <dependency>
       <groupId>com.googlecode.the-fascinator</groupId>
       <artifactId>fascinator-common</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>com.googlecode.the-fascinator</groupId>
       <artifactId>fascinator-core</artifactId>
-      <version>1.4-SNAPSHOT</version>
+      <version>1.4</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
