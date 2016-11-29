@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>au.com.redboxresearchdata.fascinator</groupId>
   <artifactId>plugin-messaging-scripting</artifactId>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
   <name>Plugin Messaging Scripts (ReDBox-Mint)</name>
   <parent>
     <artifactId>organisation</artifactId>
