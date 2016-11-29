@@ -10,9 +10,6 @@
     <groupId>com.googlecode.the-fascinator</groupId>
     <version>1.0.3</version>
   </parent>
-  <properties>
-    <fascinator.version>1.3-SNAPSHOT</fascinator.version>
-  </properties>
   <dependencies>
     <dependency>
       <groupId>com.googlecode.the-fascinator</groupId>
